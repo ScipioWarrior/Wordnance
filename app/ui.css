@@ -1,0 +1,149 @@
+/* Icon taken from http://findicons.com/icon/download/168686/graphic_design/128/ico?id=377196 */
+html, body{
+	height: 100%; 
+	width: 100%;
+	padding: 5px;
+	box-sizing: border-box;
+	font-family: 'Segoe UI', sans-serif;
+	font-weight: 400;
+	overflow: hidden;
+}
+a:link, a:hover, a:visited, a:active{
+	text-decoration: none;
+	color: blue;
+}
+h1{font-size: 24pt;}
+h2{font-size: 20pt;}
+h3{font-size: 18pt;}
+h4{font-size: 16pt; }
+h1,h2,h3,h4,h5,h6{
+	font-weight: 400;
+}
+ul{	list-style-type: disc; }
+ol{ list-style-type: decimal; }
+li{ margin-bottom: 5px; }
+ul, ol{ 
+	list-style-position: inside;
+	line-height: 150%;
+}
+button{
+	height: 30px;
+	margin: auto;
+	display: block;
+	line-height: 15px;
+}
+input[type='text']{
+	border: 1px solid gray;
+	width: 150px;
+}
+span.next{
+	width: 100%;
+	position: absolute;
+	bottom: 0; left: 50%;
+}
+/* Header */
+div#header{
+	height: 15%; width: 79.99%;
+	display: block;
+	float: right;
+}
+div#header h2{
+	line-height: 300%;
+	font-weight: 400;
+	margin-left: 20%;
+}
+/* Sidebar */
+div#sidebar{
+	height: 100%; width: 20%;
+	float: left;
+	/*background-color: #EEEEEE;*/
+}
+div.outline{
+	position: relative; top: 5%;
+}
+div#sidebar a:link, div#sidebar a:visited{
+	height: 9%;
+	width: 100%;
+	margin-top: 10%;
+	display: block;
+	color: blue; font-size: 14pt; text-align: center; line-height: normal; text-decoration: none;
+}
+div#sidebar a:hover, div#sidebar a:active{
+	color: red;
+}
+button#add{
+	position: relative;
+	display: inline;
+	right: 1%;
+}
+/* Content */
+div#content{
+	width: 79.99%;
+	line-height: 150%;
+	position: absolute; top: 100px; left: 100px;
+}
+/* Views */
+.visible{
+	padding: 5px;
+	position: absolute; left: 20%;
+	/*background-color: #DDDDDD;*/
+}
+.hidden{
+	height: 0; width: 0;
+	display: none;
+}
+/* View: Your Essay */
+div.input{
+	margin: auto;
+}
+textarea{
+	height: 300px; width: 98%;
+	font-family: sans-serif;
+	border: 1px solid gray;
+}
+div#view-input button{
+	margin: auto;
+	display: block;
+}
+/* View: Settings */
+div.listItems{
+	height: 250px; width: 200px;
+	display: block;
+	float: left;
+	border: 1px solid gray;
+	overflow: auto;
+	cursor: pointer;
+	font-family: 'Arial', sans-serif;
+}
+/* View: Analyze */
+div.table{
+	height: 300px;
+	width: 250px;
+	float: left;
+	overflow: auto;	
+}
+div.stats{
+	height: 200px;
+	float: right;
+	overflow: auto;
+}
+table.words{
+	border-collapse: separate;
+	border-spacing: 5px;
+	display: block;
+	height: 100px;
+	font-family: 'Arial', sans-serif;
+}
+table.words td, table.words th{
+	padding: 3px;
+}
+/* View: Find Synonyms */
+div#view-synonyms div.table{
+	cursor: pointer;
+}
+div.synonyms{
+	height: 200px;
+	width: 200px;
+	float: right;
+	overflow: auto;
+}

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<!-- HTA Version -->
+<html>
+<head>
+	<HTA:application 
+		id="oss"
+		applicationName = "Wordnance"
+		MaximizeButton = "No"
+		Border = "Thin"
+		Icon = "icon.ico"
+		Caption = "Yes"
+	/> 
+	<title>Wordnance</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="x-ua-compatible" content="ie=9"/>
+	<!-- JS -->
+	<script src="jquery.js"></script>
+	<script src="app.js"></script>
+	<script src="essay.js"></script>
+	<script src="events.js"></script>
+	<script src="filters.js"></script>
+	<script src="stats.js"></script>
+	<script src="sorting.js"></script>
+	<script src="ui.js"></script>
+	<script src="web.js"></script>
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="reset.css" />
+	<link rel="stylesheet" type="text/css" href="ui.css" />
+</head>
+<body>
+	<!-- Header -->
+	<div id="header">
+		<h2>Wordnance</h2>
+	</div>
+	<!-- Menu -->
+	<div id="sidebar">
+		<img src="logo.png" style="width: 60%; position: relative; left: 15%;" alt="Application &beta; 2.0" />
+		<div class="outline">
+			<a href="#view-instructions">Instructions</a>
+			<br />
+			<a href="#view-input">Essay</a>
+			<br />
+			<a href="#view-settings">Settings</a>
+			<br />
+			<a href="#view-analyze">Analyze</a>
+			<br />
+			<a href="#view-synonyms">Synonyms</a>
+			<br />
+			<a href="#view-about">About</a>
+		</div>
+	</div>
+	<!-- Content -->
+	<div id="content">
+		<div id="view-instructions" class="visible">
+			<h3>Instructions</h3>
+			<br />
+			<p>
+				Welcome to Wordnance, a new product designed to help teachers and students write top-notch essays. To use this program, 
+				follow the instructions below!
+			</p>
+			<br />
+			<ol>
+				<li>Copy and paste your essay into the <a href="#view-input">essay</a> section of the program</a></li>
+				<li>Go to the <a href="#view-settings">settings</a> section and configure the program.</li>
+				<li>Select the <a href="#view-analyze">analyze</a> section, and assess your essay!</li>
+			</ol>
+			<p>
+				You can find synonyms to use in your essay in the <a href="#view-synonyms">synonyms</a> section.
+				For more information about the program, head to the <a href="#view-about">about</a> section.
+			</p>
+			<div class="next" style="width: 100%; position: absolute; top: 100%; left: 30%; bottom: 0; right: 0; ">Ready to get started? Put in your <a href="#view-input">essay!</a></div>
+		</div>
+		<div id="view-input" class="hidden">
+			<h3>Essay</h3>
+			<br />
+			<p>
+				Copy and paste your essay into the textbox below. You can save multiple revisions of your essay by using the 
+				Save and Load features near the bottom.
+			</p>
+			<br />
+			<div class="input">
+				<textarea class="essay"></textarea>
+			</div>
+			<br />
+			<div style="display: inline;">
+				Save Essay: <select id="save_slot">
+								<option value = "1">1</option>
+								<option value = "2">2</option>
+								<option value = "3">3</option>
+								<option value = "4">4</option>
+							</select>
+							<button style="display: inline;" onclick="Essay.add( $('#save_slot').val() )">Save</button>
+			</div>
+			<div style="display: inline; margin-left: 10px;">
+				Load Essay: <select id="load_slot">
+								<option value = "1">1</option>
+								<option value = "2">2</option>
+								<option value = "3">3</option>
+								<option value = "4">4</option>
+							</select>
+				<button style="display: inline;" onclick="Essay.load( $('#load_slot').val() )">Load</button>
+			</div>
+			<div class="next" style="width: 100%; position: absolute; top: 100%; left: 30%; bottom: 0; right: 0;">Got your essay ready? Tweak your analysis <a href="#view-settings">settings</a>!</div>
+		</div>
+		<div id="view-settings" class="hidden">
+			<h3>Settings</h3>
+			<br />
+			<p>
+				Here, you can tweak your settings for the essay analysis. This lets you filter out certain words you do not want to appear
+				in the analysis and set up word sorting options.
+			</p>
+			<h4>Filters</h4>
+			<span style="width: 100%; display: block; font-size: 10pt;">Click an item to remove.</span>
+			<div style="padding-right: 10px;" title="This is the list of words that are to be filtered from the generated word table" class="listItems">
+			</div>
+			<br />
+			<div style="margin-left: 50%; display: block;">
+				<input style="padding: 5px;" type="text" title="Type in a word here to add to your filters" id="filter_string_literal" onfocus="this.value=''" value="Type a word to be filtered">
+				<button id="add" title="Click this button to add a word from the above textbox into the filter list" onclick="Filters.filterList.add( $('#filter_string_literal').val() ); $('#filter_string_literal').val('');">Add</button>
+				<div style="display: block;">
+					<div style="margin-top: 1%;">
+						Choose a filter mode
+						<br />
+						<form id="filter_type">
+							<input type="radio" name="filter_type" title="This will only allow the words in the filter list to appear" id="white_list">Whitelist
+							<br />
+							<input type="radio" name="filter_type" title="This will filter out all of the words in the filter list" id="black_list">Blacklist
+							<br />
+							<input type="radio" name="filter_type" title="This will ensure no words are filtered from the essay" id="no_list">None
+						</form>
+					</div>
+					Other options
+					<br />
+					<input type="checkbox" title="This will remove all capital letters from the essay" id="case" checked>Ignore capitalization
+					<br />
+					<input type="checkbox" title="This will filter out words like: before, after, above, below, etc." id="prepositions">Filter prepositions
+					<br />
+					<input type="checkbox" title="This will filter out words like: is, are, was, were, etc." id="helpingVerbs">Filter helping verbs
+				</div>
+			</div>
+			<div style="width: 100%; float: left; position: absolute; left: 0; top: 100%;">
+				<h4>Sorting</h4>
+				<div style="width: 50%; display: table-cell;">
+					By words:
+					<br />
+					<input type="radio" title="This will sort the words into alphabetical order in the table" name="sort_order" id="alphabetize_f">Alphabetical Order
+					<br />
+					<input type="radio" title="This will sort the words into reverse alphabetical order in the table" name="sort_order" id="alphabetize_r">Reverse Alphabetical Order
+				</div>
+				<div style="width: 50%; padding-left: 36px; display: table-cell;">
+					By frequency:
+					<br />	
+					<input type="radio" title="This will sort the words in order of increasing frequency in the table" name="sort_order" id="ascending">Ascending Order
+					<br />
+					<input type="radio" title="This will the sort the words in order of decreasing frequency in the table" name="sort_order" id="descending">Descending Order
+				</div>
+				<br />
+				<br />
+				<div class="next" style="position: absolute; bottom: 0; right: 0;">You're all set! Start the analysis by going to the <a href="#view-analyze">Analyze</a> section.</div>
+			</div>
+		</div>
+		<div id="view-analyze" class="hidden">
+			<h3>Analyze</h3>
+			<br />
+			<p>
+				Below is a word frequency list - here, you can look at how many times you used each word in your essay. You can also 
+				see some stats about your the paper.
+			</p>
+			<br />
+			<div class="table">
+				<h4>Word Frequency Table</h4>
+				<br />
+				<table>
+					<tbody>
+						<tr>
+							<th>Word</th>
+							<th>Frequency</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="stats">
+				<h4>Word Stats</h4>
+				<br />
+				<span>Average word length:</span> <span class="average_length">0</span>
+				<br />
+				<span>Word count:</span> <span class="word_count">0</span>
+				<br />
+				<span>Paragraph count:</span> <span class="paragraph_count">0</span>
+			</div>
+			<div class="next" style="width: 100%; position: absolute; top: 110%; left: 30%; bottom: 0; right: 0;">Finished your analysis? Find some <a href="#view-synonyms">synonyms</a>!</div>
+		</div>
+		<div id="view-synonyms" class="hidden">
+			<h3>Synonyms</h3>
+			<br />
+			<p>
+				One of the best ways to improve an essay is to add more variety to the word choice. You can
+				click on any of the words in the table below to see a list of synonyms for it.
+			</p>
+			<br />
+			<div class="table">
+				<h4>Word Frequency Table</h4>
+				<br />
+				<table>
+					<tbody>
+						<tr>
+							<th>Word</th>
+							<th>Frequency</th>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="synonyms">
+				<h4>Synonym List</h4>
+				<br />
+			</div>
+			<div class="next" style="width: 100%; position: absolute; top: 110%; left: 30%; bottom: 0; right: 0;">Found some synonyms? Use them in your <a href="#view-input">essay</a>!</div>
+		</div>
+		<div id="view-about" class="hidden">
+			<h3>About</h3>
+			<br />
+			<p>
+				Wordnance is a tool designed for high-school and AP level English classes that helps to analyze diction in student's essays. The program
+				was created to help make the lives of teachers easier, and to help improve the writing skills and vocabulary of students everywhere.
+			</p>
+			<br />
+			<h4>Synonyms</h4>
+			<p>
+				Synonyms are powered by the Altervista Thesaurus, a web-service that allows JavaScript API access to it's repository of 
+				words and synonyms.
+			</p>
+			<br />
+			<h4>About the Developers</h4>
+			<p>
+				Wordnance was developed by Joshua Kayani and RJ Duane for the 2014 Technology Student Association Open Source Software 
+				Development competition. We believe that this software has a future on the computers of every teacher in the US and abroad.
+			</p>
+		</div>
+	</div>
+</body>
+</html>
+	
